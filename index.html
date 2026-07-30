@@ -637,7 +637,11 @@ footer{padding:3.5rem 8vw;background:#080808;border-top:1px solid rgba(201,169,1
 .lgpd-row{display:flex;align-items:flex-start;gap:.8rem;cursor:pointer!important;user-select:none}
 .lgpd-box{width:18px;height:18px;min-width:18px;border:1.5px solid rgba(201,169,110,.55);background:transparent;display:flex;align-items:center;justify-content:center;margin-top:2px;transition:background .2s,border-color .2s;flex-shrink:0}
 .lgpd-box.on{background:var(--gold);border-color:var(--gold)}
-.lgpd-box.on::after{content:'✓';color:#0a0a08;font-size:.75rem;font-weight:700;line-height:1}
+/* visto em SVG, não em glifo de fonte: rende igual em qualquer aparelho */
+.lgpd-box.on::after{
+  content:'';width:12px;height:12px;
+  background:no-repeat center/contain url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230a0a08' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6L9 17l-5-5'/%3E%3C/svg%3E");
+}
 .lgpd-txt{font-size:.72rem;letter-spacing:.05em;text-transform:none;color:rgba(250,247,240,.65);line-height:1.55}
 .lgpd-field.lgpd-error .lgpd-box{border-color:rgba(255,80,80,.9);box-shadow:0 0 0 2px rgba(255,80,80,.3)}
 .lgpd-field.lgpd-error .lgpd-txt{color:rgba(255,120,120,.9)}
@@ -758,8 +762,35 @@ footer{padding:3.5rem 8vw;background:#080808;border-top:1px solid rgba(201,169,1
 .map-btn-primary,.map-btn-secondary,.redes-btn,.tab-btn{
   font-size:.74rem!important;letter-spacing:.16em!important;
 }
+/* o @villacascaisrestaurante é longo e cortava dentro do botão em
+   qualquer tela estreita, não só no telemóvel */
+.redes-btn{
+  letter-spacing:.1em!important;overflow-wrap:anywhere;white-space:normal;
+  text-align:center;min-height:52px;height:auto;padding-top:.9rem;padding-bottom:.9rem;
+}
 .nav-cta{font-size:.72rem!important;letter-spacing:.13em!important}
 .nav-links a{font-size:.76rem!important}
+
+/* ---- TABLET E PORTÁTIL: o "Reservar Mesa" ficava cortado ----
+   A barra precisa de ~1100px para caber inteira, mas o menu de texto
+   só sumia em 768px. Entre 769 e 1100 a direita terminava em 1044px
+   fixos e era cortada — em 900px sumia mais de 140px do botão.
+   Aqui o menu encolhe antes de sumir, para o portátil não perder
+   a navegação de texto à toa. */
+@media(max-width:1120px){
+  nav{padding:1.2rem 1.6rem}
+  .nav-links{gap:1.4rem}
+  .nav-links a{font-size:.7rem!important;letter-spacing:.16em!important}
+  .nav-right{gap:.7rem}
+}
+@media(max-width:960px){
+  .nav-links{gap:1rem}
+  .nav-links a{font-size:.66rem!important;letter-spacing:.1em!important}
+}
+@media(max-width:900px){
+  /* abaixo disto não cabe de jeito nenhum: fica logo + ícones + CTA */
+  .nav-links{display:none}
+}
 .scroll-hint,.scroll-hint span,.hscroll,.hscroll span{font-size:.72rem!important}
 /* segunda leva: localização, formulário, parceiros e rodapé */
 .loc-label,.loc-map-hint,.contact-label,.parceiros-label,.parceiro-type,
@@ -773,6 +804,20 @@ footer{padding:3.5rem 8vw;background:#080808;border-top:1px solid rgba(201,169,1
 #hint span,.scroll-arrow span{font-size:.72rem!important;letter-spacing:.18em!important}
 /* "Descobrir" era o único abaixo do mínimo de contraste (4,98:1) */
 .scroll-arrow span{color:rgba(201,169,110,.95)!important}
+/* ---------- ícones ----------
+   Emoji não é ícone: muda de desenho em cada aparelho, não aceita
+   cor do tema e não escala com a tipografia. Trocados por SVG de
+   traço, no mesmo padrão do resto do site (24x24, currentColor). */
+.ico{
+  width:1.05em;height:1.05em;flex:none;
+  vertical-align:-.16em;margin-right:.5em;
+  stroke-width:1.7;
+}
+.end-lbl{display:inline-flex;align-items:center}
+.menu-tabs-bottom .tab-btn{display:inline-flex;align-items:center;gap:.45em}
+.menu-tabs-bottom .tab-btn .ico{margin-right:0;width:1em;height:1em}
+.map-close{display:inline-flex;align-items:center;justify-content:center}
+
 /* modal do mapa */
 .map-modal-sub,.map-info-lbl{font-size:.72rem!important;letter-spacing:.16em!important}
 /* Política de Privacidade e Termos estavam em 3,58:1 — abaixo do
@@ -882,7 +927,7 @@ footer{padding:3.5rem 8vw;background:#080808;border-top:1px solid rgba(201,169,1
 </section>
 
 <div id="endereco-banner">
-  <div class="end-item" onclick="openMapModal()" style="cursor:pointer!important" title="Ver no mapa"><div class="end-lbl">📍 Endereço</div><div class="end-val">Av. Santos Dumont, 763, Centro, Uberaba MG</div></div>
+  <div class="end-item" onclick="openMapModal()" style="cursor:pointer!important" title="Ver no mapa"><div class="end-lbl"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="2.6"/></svg>Endereço</div><div class="end-val">Av. Santos Dumont, 763, Centro, Uberaba MG</div></div>
   <div class="end-sep"></div>
   <div class="end-item"><div class="end-lbl">Horário</div><div class="end-val">Ter a Dom · 12h às 15h &amp; 19h às 23h</div></div>
   <div class="end-sep"></div>
@@ -955,10 +1000,10 @@ footer{padding:3.5rem 8vw;background:#080808;border-top:1px solid rgba(201,169,1
 
   <!-- TABS INFERIORES — clica e volta ao topo da seção -->
   <div class="menu-tabs menu-tabs-bottom">
-    <button class="tab-btn active" data-tab="entradas" onclick="switchTabBottom('entradas',this)">↑ Entradas</button>
-    <button class="tab-btn" data-tab="mar" onclick="switchTabBottom('mar',this)">↑ Peixe &amp; Mar</button>
-    <button class="tab-btn" data-tab="carnes" onclick="switchTabBottom('carnes',this)">↑ Bacalhaus</button>
-    <button class="tab-btn" data-tab="tipicas" onclick="switchTabBottom('tipicas',this)">↑ Arrozes</button>
+    <button class="tab-btn active" data-tab="entradas" onclick="switchTabBottom('entradas',this)"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>Entradas</button>
+    <button class="tab-btn" data-tab="mar" onclick="switchTabBottom('mar',this)"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>Peixe &amp; Mar</button>
+    <button class="tab-btn" data-tab="carnes" onclick="switchTabBottom('carnes',this)"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>Bacalhaus</button>
+    <button class="tab-btn" data-tab="tipicas" onclick="switchTabBottom('tipicas',this)"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>Arrozes</button>
   </div>
 
 </section>
@@ -993,7 +1038,7 @@ footer{padding:3.5rem 8vw;background:#080808;border-top:1px solid rgba(201,169,1
     <div class="ambiente-img-stack reveal-left">
       <img class="amb-img-main" id="ambMain" alt="Villa Cascais"/>
       <img class="amb-img-accent" id="ambAccent" alt="Detalhe"/>
-      <div class="amb-gold-block"><div class="amb-gold-num">★</div><div class="amb-gold-lbl">Fine<br>Dining</div></div>
+      <div class="amb-gold-block"><div class="amb-gold-num"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="width:1em;height:1em;display:block;margin:0 auto"><path d="M12 2.6l2.9 5.9 6.5.95-4.7 4.58 1.11 6.47L12 17.45 6.19 20.5l1.11-6.47L2.6 9.45l6.5-.95z"/></svg></div><div class="amb-gold-lbl">Fine<br>Dining</div></div>
     </div>
     <div class="ambiente-text">
       <div class="sec-label reveal">Nosso Espaço</div>
@@ -1160,7 +1205,7 @@ footer{padding:3.5rem 8vw;background:#080808;border-top:1px solid rgba(201,169,1
 <!-- MAP MODAL -->
 <div id="mapModal" class="map-overlay" role="dialog" aria-modal="true" aria-label="Localização Villa Cascais" onclick="closeMapModal(event)">
   <div class="map-box" onclick="event.stopPropagation()">
-    <button class="map-close" onclick="closeMapModal()" aria-label="Fechar">✕</button>
+    <button class="map-close" onclick="closeMapModal()" aria-label="Fechar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" style="width:20px;height:20px"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
     <div class="map-modal-header">
       <img class="map-modal-logo" id="mapLogo" alt="Villa Cascais"/>
       <div class="map-modal-title">VILLA CASCAIS</div>
