@@ -453,6 +453,12 @@ footer{padding:3.5rem 8vw;background:#080808;border-top:1px solid rgba(201,169,1
   transition:all .3s;white-space:nowrap;
 }
 .loc-btn-primary:hover{background:var(--gold-light);transform:translateY(-2px);box-shadow:0 10px 30px rgba(201,169,110,.3);}
+.cardapio-cta{text-align:center;padding:3rem 1.5rem 1rem}
+.cardapio-cta p{
+  font-family:'Cormorant Garamond',serif;font-size:clamp(1rem,3.4vw,1.25rem);
+  line-height:1.7;color:rgba(250,247,240,.72);margin-bottom:1.6rem;
+}
+.cardapio-cta p em{color:var(--gold-light);font-style:italic}
 .loc-btn-secondary{
   display:inline-flex;align-items:center;gap:.7rem;
   font-family:'Raleway',sans-serif;font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;
@@ -824,52 +830,57 @@ footer{padding:3.5rem 8vw;background:#080808;border-top:1px solid rgba(201,169,1
   <div class="menu-tabs">
     <button class="tab-btn active" data-tab="entradas" onclick="switchTab('entradas',this)">Entradas</button>
     <button class="tab-btn" data-tab="mar" onclick="switchTab('mar',this)">Peixe &amp; Mar</button>
-    <button class="tab-btn" data-tab="carnes" onclick="switchTab('carnes',this)">Carnes &amp; Aves</button>
-    <button class="tab-btn" data-tab="tipicas" onclick="switchTab('tipicas',this)">Típicas</button>
+    <button class="tab-btn" data-tab="carnes" onclick="switchTab('carnes',this)">Bacalhaus</button>
+    <button class="tab-btn" data-tab="tipicas" onclick="switchTab('tipicas',this)">Arrozes</button>
   </div>
 
   <div class="menu-panel active" id="panel-entradas">
     <div class="dish-showcase">
-      <div class="dish-row"><div class="dish-img-wrap"><img class="dish-img" id="imgPao" alt="Pão & Azeite"/><div class="dish-img-overlay"></div></div><div class="dish-info"><div class="dish-num">01 · Entradas</div><h3 class="dish-name">Pão Artesanal<br><em>&amp; Azeite</em></h3><div class="dish-divider"></div><p class="dish-desc">Pão de massa mãe assado no dia, servido com azeite extra virgem alentejano DOP, flor de sal e azeitonas marinadas. O ritual que começa cada refeição.</p></div></div>
-      <div class="dish-row"><div class="dish-img-wrap"><img class="dish-img" id="imgBolinho" alt="Bolinhos de Bacalhau"/><div class="dish-img-overlay"></div></div><div class="dish-info"><div class="dish-num">02 · Entradas</div><h3 class="dish-name">Bolinhos de<br><em>Bacalhau</em></h3><div class="dish-divider"></div><p class="dish-desc">Bolinhos crocantes de bacalhau com batata-doce e salsa fresca, servidos com aioli de limão. A entrada que todos adoram.</p></div></div>
-      <div class="dish-row"><div class="dish-img-wrap"><img class="dish-img" id="imgCaracol" alt="Caracóis"/><div class="dish-img-overlay"></div></div><div class="dish-info"><div class="dish-num">03 · Entradas</div><h3 class="dish-name">Caracóis<br><em>da Casa</em></h3><div class="dish-divider"></div><p class="dish-desc">Caracóis cozinhados em caldo de alho, cominhos, salsa e pimenta preta. Uma petisca portuguesa por excelência, servida bem quente à mesa.</p></div></div>
+      <div class="dish-row"><div class="dish-img-wrap"><img class="dish-img" id="imgBolinho" alt="Bolinhos de Bacalhau"/><div class="dish-img-overlay"></div></div><div class="dish-info"><div class="dish-num">01 · Entradas</div><h3 class="dish-name">Bolinhos de<br><em>Bacalhau</em></h3><div class="dish-divider"></div><p class="dish-desc">Crocantes por fora, macios por dentro. A entrada que todos adoram, servida em porção de oito unidades.</p></div></div>
+      <div class="dish-row"><div class="dish-img-wrap"><img class="dish-img" id="imgPao" alt="Antipasto Mediterrâneo"/><div class="dish-img-overlay"></div></div><div class="dish-info"><div class="dish-num">02 · Entradas</div><h3 class="dish-name">Antipasto<br><em>Mediterrâneo</em></h3><div class="dish-divider"></div><p class="dish-desc">Alcachofra, azeitonas, tomate seco, muçarela de búfala, tomate cereja, azeite e pimenta calabresa, com um generoso cesto de pães.</p></div></div>
+      <div class="dish-row"><div class="dish-img-wrap"><img class="dish-img" id="imgPrego" alt="Pica-Pau Aperitivo"/><div class="dish-img-overlay"></div></div><div class="dish-info"><div class="dish-num">03 · Entradas</div><h3 class="dish-name">Pica-Pau<br><em>Aperitivo</em></h3><div class="dish-divider"></div><p class="dish-desc">Lombo e filé mignon em cubos, salteados no molho de cerveja. O petisco português que pede boa conversa à mesa.</p></div></div>
     </div>
   </div>
 
   <div class="menu-panel" id="panel-mar">
     <div class="dish-showcase">
       <div class="dish-row"><div class="dish-img-wrap"><img class="dish-img" id="imgPolvo" alt="Polvo à Lagareiro"/><div class="dish-img-overlay"></div></div><div class="dish-info"><div class="dish-num">01 · Peixe &amp; Mar</div><h3 class="dish-name">Polvo à<br><em>Lagareiro</em></h3><div class="dish-divider"></div><p class="dish-desc">Polvo assado em azeite extra virgem com batatas a murro, alho confitado e coentros frescos. Um clássico português elevado à arte.</p></div></div>
-      <div class="dish-row"><div class="dish-img-wrap"><img class="dish-img" id="imgSardinha" alt="Sardinhas Assadas"/><div class="dish-img-overlay"></div></div><div class="dish-info"><div class="dish-num">02 · Peixe &amp; Mar</div><h3 class="dish-name">Sardinhas<br><em>Assadas</em></h3><div class="dish-divider"></div><p class="dish-desc">Sardinhas frescas assadas na brasa, servidas com batatas e salada de tomate e pepino. A essência do verão português em cada garfada.</p></div></div>
-      <div class="dish-row"><div class="dish-img-wrap"><img class="dish-img" id="imgAmeijoa" alt="Ameijoas"/><div class="dish-img-overlay"></div></div><div class="dish-info"><div class="dish-num">03 · Peixe &amp; Mar</div><h3 class="dish-name">Ameijoas<br><em>à Bulhão Pato</em></h3><div class="dish-divider"></div><p class="dish-desc">Ameijoas abertas em azeite, alho laminado, coentros e vinho branco seco. Acompanhadas de pão artesanal para não desperdiçar o caldo.</p></div></div>
-      <div class="dish-row"><div class="dish-img-wrap"><img class="dish-img" id="imgCataplana" alt="Cataplana"/><div class="dish-img-overlay"></div></div><div class="dish-info"><div class="dish-num">04 · Peixe &amp; Mar</div><h3 class="dish-name">Cataplana<br><em>de Marisco</em></h3><div class="dish-divider"></div><p class="dish-desc">Cataplana algarvia com gambas, amêijoas e choco, aromatizada com açafrão, pimento e coentros. Cozinhada lentamente para preservar todos os sabores.</p></div></div>
-      <div class="dish-row"><div class="dish-img-wrap"><img class="dish-img" id="imgPeixe" alt="Peixe da Época"/><div class="dish-img-overlay"></div></div><div class="dish-info"><div class="dish-num">05 · Peixe &amp; Mar</div><h3 class="dish-name">Peixe<br><em>da Época</em></h3><div class="dish-divider"></div><p class="dish-desc">Peixe fresco selecionado diariamente, grelhado ou assado conforme a melhor técnica. Consulte o chefe para a sugestão do dia.</p></div></div>
+      <div class="dish-row"><div class="dish-img-wrap"><img class="dish-img" id="imgSardinha" alt="Sardinhas grelhadas com broa de milho"/><div class="dish-img-overlay"></div></div><div class="dish-info"><div class="dish-num">02 · Peixe &amp; Mar</div><h3 class="dish-name">Sardinhas<br><em>com Broa</em></h3><div class="dish-divider"></div><p class="dish-desc">Grelhadas no sal grosso sobre uma fatia de broa de milho regada com azeite. A essência do verão português em cada garfada.</p></div></div>
+      <div class="dish-row"><div class="dish-img-wrap"><img class="dish-img" id="imgAmeijoa" alt="Mexilhões à Bulhão Pato"/><div class="dish-img-overlay"></div></div><div class="dish-info"><div class="dish-num">03 · Peixe &amp; Mar</div><h3 class="dish-name">Mexilhões<br><em>à Bulhão Pato</em></h3><div class="dish-divider"></div><p class="dish-desc">Cozidos no vinho branco com especiarias, alho, limão e azeite. Acompanhados de pão para não desperdiçar o caldo.</p></div></div>
+      <div class="dish-row"><div class="dish-img-wrap"><img class="dish-img" id="imgPeixe" alt="Robalo grelhado com arroz de polvo"/><div class="dish-img-overlay"></div></div><div class="dish-info"><div class="dish-num">04 · Peixe &amp; Mar</div><h3 class="dish-name">Robalo<br><em>Grelhado</em></h3><div class="dish-divider"></div><p class="dish-desc">Ao molho de limão, camarões e manteiga, servido com um delicioso arroz de polvo. Peixe nobre, tratado com respeito.</p></div></div>
     </div>
   </div>
 
   <div class="menu-panel" id="panel-carnes">
     <div class="dish-showcase">
-      <div class="dish-row"><div class="dish-img-wrap"><img class="dish-img" id="imgPiripiri" alt="Frango Piripiri"/><div class="dish-img-overlay"></div></div><div class="dish-info"><div class="dish-num">01 · Aves &amp; Carnes</div><h3 class="dish-name">Frango<br><em>Piripiri</em></h3><div class="dish-divider"></div><p class="dish-desc">Frango marinado em piripiri caseiro, assado lentamente até atingir a perfeição. Servido com batatas fritas artesanais e salada da época.</p></div></div>
-      <div class="dish-row"><div class="dish-img-wrap"><img class="dish-img" id="imgPrego" alt="Prego da Casa"/><div class="dish-img-overlay"></div></div><div class="dish-info"><div class="dish-num">02 · Carnes</div><h3 class="dish-name">Prego<br><em>da Casa</em></h3><div class="dish-divider"></div><p class="dish-desc">Lombinho de novilho em pão artesanal com alho dourado e mostarda, acompanhado de salada fresca e batatas. O nosso prego de autor.</p></div></div>
-      <div class="dish-row"><div class="dish-img-wrap"><img class="dish-img" id="imgRojoes" alt="Rojões"/><div class="dish-img-overlay"></div></div><div class="dish-info"><div class="dish-num">03 · Carnes</div><h3 class="dish-name">Rojões à<br><em>Minhota</em></h3><div class="dish-divider"></div><p class="dish-desc">Cubos de porco marinados em vinho verde, alho e louro, fritos até ficarem crocantes. Servidos com arroz e castanhas assadas.</p></div></div>
-      <div class="dish-row"><div class="dish-img-wrap"><img class="dish-img" id="imgTripas" alt="Tripas à Moda do Porto"/><div class="dish-img-overlay"></div></div><div class="dish-info"><div class="dish-num">04 · Carnes</div><h3 class="dish-name">Tripas à Moda<br><em>do Porto</em></h3><div class="dish-divider"></div><p class="dish-desc">Cozido lento de tripas com feijão branco, chouriço e legumes. Uma viagem ao Porto em cada garfada.</p></div></div>
+      <div class="dish-row"><div class="dish-img-wrap"><img class="dish-img" id="imgBacalhau" alt="Bacalhau Villa Cascais"/><div class="dish-img-overlay"></div></div><div class="dish-info"><div class="dish-num">01 · Bacalhaus</div><h3 class="dish-name">Bacalhau<br><em>Villa Cascais</em></h3><div class="dish-divider"></div><p class="dish-desc">Suculento e assado com muito azeite de oliva, batatas, azeitonas e brócolis. A assinatura da casa, o prato que leva o nosso nome.</p></div></div>
+      <div class="dish-row"><div class="dish-img-wrap"><img class="dish-img" id="imgTipicas" alt="Bacalhau à Portuguesa"/><div class="dish-img-overlay"></div></div><div class="dish-info"><div class="dish-num">02 · Bacalhaus</div><h3 class="dish-name">Bacalhau<br><em>à Portuguesa</em></h3><div class="dish-divider"></div><p class="dish-desc">Grelhado com azeite, pimentões, cebola, ovos, batata e azeitonas. O clássico que atravessou gerações sem mudar uma vírgula.</p></div></div>
+      <div class="dish-row"><div class="dish-img-wrap"><img class="dish-img" id="imgBras" alt="Bacalhau gratinado nas natas"/><div class="dish-img-overlay"></div></div><div class="dish-info"><div class="dish-num">03 · Bacalhaus</div><h3 class="dish-name">Bacalhau<br><em>Gratinado nas Natas</em></h3><div class="dish-divider"></div><p class="dish-desc">Lascas de bacalhau com natas, alho-poró, batata e azeitonas sem caroço, gratinadas ao forno. Conforto em estado puro.</p></div></div>
     </div>
   </div>
 
   <div class="menu-panel" id="panel-tipicas">
     <div class="dish-showcase">
-      <div class="dish-row"><div class="dish-img-wrap"><img class="dish-img" id="imgBras" alt="Bacalhau à Brás"/><div class="dish-img-overlay"></div></div><div class="dish-info"><div class="dish-num">01 · Típicas</div><h3 class="dish-name">Bacalhau<br><em>à Brás</em></h3><div class="dish-divider"></div><p class="dish-desc">Lascas de bacalhau salteadas com cebola, alho, batata palha crocante e ovos mexidos. Finalizado com salsa, azeitonas e azeite. Um clássico eterno.</p></div></div>
-      <div class="dish-row"><div class="dish-img-wrap"><img class="dish-img" id="imgArozPato" alt="Arroz de Pato"/><div class="dish-img-overlay"></div></div><div class="dish-info"><div class="dish-num">02 · Típicas</div><h3 class="dish-name">Arroz de<br><em>Pato</em></h3><div class="dish-divider"></div><p class="dish-desc">Pato confitado desfiado sobre arroz cozido no seu caldo, gratinado no forno e decorado com rodelas de chouriço tostado. Reconforto em estado puro.</p></div></div>
-      <div class="dish-row"><div class="dish-img-wrap"><img class="dish-img" id="imgFeijoaTrasmo" alt="Feijoada Transmontana"/><div class="dish-img-overlay"></div></div><div class="dish-info"><div class="dish-num">03 · Típicas</div><h3 class="dish-name">Feijoada<br><em>Transmontana</em></h3><div class="dish-divider"></div><p class="dish-desc">Feijoada robusta com feijão vermelho, chouriço e morcela. Cozida a fogo lento com louro e ervas aromáticas de Trás-os-Montes.</p></div></div>
-      <div class="dish-row"><div class="dish-img-wrap"><img class="dish-img" id="imgTipicas" alt="Couvert Típico"/><div class="dish-img-overlay"></div></div><div class="dish-info"><div class="dish-num">04 · Típicas</div><h3 class="dish-name">Couvert<br><em>Típico</em></h3><div class="dish-divider"></div><p class="dish-desc">Seleção de petiscos da casa: queijo da Serra, alheira, presunto de Barrancos, pão de centeio e pasta de azeitonas. Uma viagem pelas regiões de Portugal.</p></div></div>
+      <div class="dish-row"><div class="dish-img-wrap"><img class="dish-img" id="imgArozPato" alt="Arroz de Pato"/><div class="dish-img-overlay"></div></div><div class="dish-info"><div class="dish-num">01 · Arrozes</div><h3 class="dish-name">Arroz de<br><em>Pato</em></h3><div class="dish-divider"></div><p class="dish-desc">Coxa de pato desfiada, molho demi-glace, alho-poró, tomate picado, morcela e cebola roxa. Reconforto em estado puro.</p></div></div>
+      <div class="dish-row"><div class="dish-img-wrap"><img class="dish-img" id="imgCataplana" alt="Arroz caldoso de frutos do mar"/><div class="dish-img-overlay"></div></div><div class="dish-info"><div class="dish-num">02 · Arrozes</div><h3 class="dish-name">Arroz Caldoso<br><em>de Frutos do Mar</em></h3><div class="dish-divider"></div><p class="dish-desc">Camarão com e sem casca, mexilhões, polvo, vôngole e pérolas de lula. O mar inteiro numa panela só.</p></div></div>
     </div>
+  </div>
+
+  <!-- CTA para o cardápio completo com preços -->
+  <div class="cardapio-cta reveal">
+    <p>Estes são alguns dos nossos destaques.<br><em>O cardápio completo tem mais de cem opções.</em></p>
+    <a class="loc-btn-primary" href="cardapio.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" style="width:16px;height:16px" aria-hidden="true"><path d="M4 4h16v16H4z"/><path d="M8 9h8M8 13h8M8 17h5"/></svg>
+      Ver cardápio completo
+    </a>
   </div>
 
   <!-- TABS INFERIORES — clica e volta ao topo da seção -->
   <div class="menu-tabs menu-tabs-bottom">
     <button class="tab-btn active" data-tab="entradas" onclick="switchTabBottom('entradas',this)">↑ Entradas</button>
     <button class="tab-btn" data-tab="mar" onclick="switchTabBottom('mar',this)">↑ Peixe &amp; Mar</button>
-    <button class="tab-btn" data-tab="carnes" onclick="switchTabBottom('carnes',this)">↑ Carnes &amp; Aves</button>
-    <button class="tab-btn" data-tab="tipicas" onclick="switchTabBottom('tipicas',this)">↑ Típicas</button>
+    <button class="tab-btn" data-tab="carnes" onclick="switchTabBottom('carnes',this)">↑ Bacalhaus</button>
+    <button class="tab-btn" data-tab="tipicas" onclick="switchTabBottom('tipicas',this)">↑ Arrozes</button>
   </div>
 
 </section>
@@ -1129,7 +1140,8 @@ const IMGS={
   arozpato:'AROZPATO.webp',
   feijoadatrasmo:'FEIJOADATRASMO.webp',
   tipicas:'TIPICAS.webp',
-  pao:'PAO.webp'
+  pao:'PAO.webp',
+  bacalhau:'BACALHAUU.webp'
 };
 
 // SET DOM
@@ -1141,12 +1153,15 @@ document.getElementById('heroBg').style.backgroundImage="url('"+CAPA_SRC+"')";
 document.getElementById('ambMain').src=IMGS.polvo;
 document.getElementById('ambAccent').src=IMGS.ameijoa;
 
+/* Só pratos que existem de verdade no cardápio do Chef Sérgio.
+   Foram removidos os que a vitrine anunciava e a cozinha não serve:
+   caracóis, cataplana de marisco, peixe da época, frango piripiri,
+   prego, rojões, tripas, feijoada transmontana e couvert típico. */
 const dishMap={
-  imgPao:'pao',imgBolinho:'bolinho',imgCaracol:'caracol',
-  imgPolvo:'polvo',imgSardinha:'sardinha',imgAmeijoa:'ameijoa',
-  imgCataplana:'cataplana',imgPeixe:'peixe',
-  imgPiripiri:'piripiri',imgPrego:'prego',imgRojoes:'rojoes',imgTripas:'tripas',
-  imgBras:'bras',imgArozPato:'arozpato',imgFeijoaTrasmo:'feijoadatrasmo',imgTipicas:'tipicas'
+  imgBolinho:'bolinho',imgPao:'pao',imgPrego:'prego',
+  imgPolvo:'polvo',imgSardinha:'sardinha',imgAmeijoa:'ameijoa',imgPeixe:'peixe',
+  imgBacalhau:'bacalhau',imgTipicas:'tipicas',imgBras:'bras',
+  imgArozPato:'arozpato',imgCataplana:'cataplana'
 };
 Object.entries(dishMap).forEach(([id,k])=>{const el=document.getElementById(id);if(el)el.src=IMGS[k];});
 
@@ -1225,18 +1240,20 @@ function switchTabBottom(id,btn){
 }
 
 // MARQUEE
+/* Só pratos reais do cardápio do Chef Sérgio (conferido com o PDF). */
 const mData=[
+  {n:'Bacalhau Villa Cascais',c:'Bacalhaus',k:'bacalhau'},
   {n:'Polvo à Lagareiro',c:'Peixe & Mar',k:'polvo'},
-  {n:'Sardinhas Assadas',c:'Peixe & Mar',k:'sardinha'},
-  {n:'Frango Piripiri',c:'Aves',k:'piripiri'},
-  {n:'Prego da Casa',c:'Carnes',k:'prego'},
   {n:'Bolinhos de Bacalhau',c:'Entradas',k:'bolinho'},
-  {n:'Ameijoas Bulhão Pato',c:'Mar',k:'ameijoa'},
-  {n:'Cataplana de Marisco',c:'Mar',k:'cataplana'},
-  {n:'Tripas à Porto',c:'Típicas',k:'tripas'},
-  {n:'Arroz de Pato',c:'Típicas',k:'arozpato'},
-  {n:'Bacalhau à Brás',c:'Típicas',k:'bras'},
-  {n:'Feijoada Transmontana',c:'Típicas',k:'feijoadatrasmo'},
+  {n:'Arroz de Pato',c:'Arrozes',k:'arozpato'},
+  {n:'Sardinhas com Broa',c:'Peixe & Mar',k:'sardinha'},
+  {n:'Bacalhau à Portuguesa',c:'Bacalhaus',k:'tipicas'},
+  {n:'Mexilhões à Bulhão Pato',c:'Peixe & Mar',k:'ameijoa'},
+  {n:'Arroz Caldoso de Frutos do Mar',c:'Arrozes',k:'cataplana'},
+  {n:'Pica-Pau Aperitivo',c:'Entradas',k:'prego'},
+  {n:'Bacalhau Gratinado nas Natas',c:'Bacalhaus',k:'bras'},
+  {n:'Robalo Grelhado',c:'Peixe & Mar',k:'peixe'},
+  {n:'Antipasto Mediterrâneo',c:'Entradas',k:'pao'},
 ];
 const track=document.getElementById('marqueeTrack');
 [...mData,...mData].forEach(d=>{
