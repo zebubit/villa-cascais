@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pedido · Villa Cascais — DEMONSTRAÇÃO</title>
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#0A0A08">
+<link rel="icon" href="LOGO1.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --gold:#C9A96E; --gold-light:#E8D5A3; --cream:#FAF7F0;
+  --dark:#0A0A08; --navy:#1B2A4A;
+  --surface:#12120F; --surface-2:#191813;
+  --line:rgba(201,169,110,.22);
+  --txt:#FAF7F0; --txt-soft:rgba(250,247,240,.74); --txt-mute:rgba(250,247,240,.52);
+  --demo:#E0A03A;
+  --e:cubic-bezier(.22,.61,.36,1);
+  --head-h:60px; --demo-h:34px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  background:var(--dark);color:var(--txt);
+  font-family:'Raleway',system-ui,sans-serif;font-size:16px;line-height:1.6;
+  overflow-x:hidden;-webkit-font-smoothing:antialiased;padding-bottom:96px;
+}
+img{max-width:100%;display:block}
+button,input,select,textarea{font:inherit;color:inherit}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+
+/* ---------- faixa de demonstração ---------- */
+.demo-bar{
+  position:fixed;inset:0 0 auto 0;height:var(--demo-h);z-index:120;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  background:var(--demo);color:#1A1206;
+  font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  padding:0 12px;text-align:center;
+}
+.demo-bar svg{width:14px;height:14px;flex:none}
+
+/* ---------- header ---------- */
+.hd{
+  position:fixed;inset:var(--demo-h) 0 auto 0;height:var(--head-h);z-index:110;
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+  padding:0 clamp(12px,4vw,28px);
+  background:rgba(10,10,8,.95);backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);
+}
+.hd .mark{display:flex;align-items:center;gap:9px;min-width:0;min-height:44px}
+.hd .mark img{height:34px;width:auto;object-fit:contain;flex:none}
+.hd .mark span{font-family:'Cinzel',serif;font-size:clamp(11px,3vw,14px);letter-spacing:.14em;color:var(--gold-light);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hd .voltar{
+  display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:0 12px;
+  border:1px solid var(--line);border-radius:2px;color:var(--txt-soft);
+  font-size:11px;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap;
+}
+.hd .voltar:hover{border-color:var(--gold);color:var(--gold-light)}
+.hd .voltar svg{width:15px;height:15px}
+
+/* ---------- barra busca/categorias ---------- */
+.bar{
+  position:sticky;top:calc(var(--demo-h) + var(--head-h));z-index:90;
+  background:rgba(10,10,8,.97);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);
+}
+.bar-in{max-width:1080px;margin:0 auto;padding:10px clamp(12px,4vw,28px) 0}
+.search{position:relative;display:flex;align-items:center}
+.search svg{position:absolute;left:13px;width:17px;height:17px;color:var(--gold);pointer-events:none}
+.search input{
+  width:100%;min-height:46px;padding:0 14px 0 40px;font-size:16px;color:var(--cream);
+  background:var(--surface-2);border:1px solid var(--line);border-radius:2px;
+}
+.search input::placeholder{color:var(--txt-mute)}
+.search input:focus{border-color:var(--gold);outline:none}
+.cats{display:flex;gap:7px;overflow-x:auto;scrollbar-width:none;padding:10px clamp(12px,4vw,28px);max-width:1080px;margin:0 auto}
+.cats::-webkit-scrollbar{display:none}
+.cats button{
+  flex:none;min-height:44px;padding:0 15px;background:transparent;
+  border:1px solid var(--line);border-radius:100px;cursor:pointer;
+  font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--txt-soft);white-space:nowrap;
+  transition:all .2s var(--e);
+}
+.cats button:hover{border-color:var(--gold);color:var(--gold-light)}
+.cats button.on{background:var(--gold);border-color:var(--gold);color:#14110B;font-weight:600}
+
+/* ---------- lista ---------- */
+main{max-width:1080px;margin:0 auto;padding:0 clamp(12px,4vw,28px)}
+.grupo{padding-top:clamp(30px,6vw,52px);scroll-margin-top:calc(var(--demo-h) + var(--head-h) + 116px)}
+.grupo > h2{
+  font-family:'Cinzel',serif;font-weight:400;font-size:clamp(19px,4.6vw,28px);
+  letter-spacing:.05em;color:var(--cream);text-align:center;
+}
+.grupo .tile{height:30px;max-width:250px;margin:12px auto 22px;opacity:.3;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 72 72'%3E%3Cg fill='none' stroke='%23C9A96E' stroke-width='1.4'%3E%3Cpath d='M36 4 L68 36 L36 68 L4 36 Z'/%3E%3Ccircle cx='36' cy='36' r='6'/%3E%3C/g%3E%3C/svg%3E");background-size:30px 30px}
+.sub{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin:26px 0 12px;font-weight:600}
+
+.item{
+  display:grid;grid-template-columns:1fr auto;gap:10px 14px;align-items:start;
+  padding:14px 0;border-bottom:1px solid var(--line);
+}
+.item.com-foto{grid-template-columns:88px 1fr auto}
+.item .foto{grid-row:span 2;width:88px;height:88px;object-fit:cover;border:1px solid var(--line)}
+.item .nome{font-family:'Cinzel',serif;font-size:clamp(14px,3.3vw,16.5px);color:var(--cream);line-height:1.35;letter-spacing:.02em}
+.item .nome b{color:var(--gold);font-weight:500;font-size:.78em;letter-spacing:.1em;margin-right:6px}
+.item .desc{grid-column:1/-1;font-family:'Cormorant Garamond',serif;font-size:clamp(13.5px,3vw,15.5px);line-height:1.45;color:var(--txt-mute);max-width:62ch}
+.item.com-foto .desc{grid-column:2/-1}
+.item .preco{font-family:'Cinzel',serif;font-size:clamp(14px,3.2vw,16px);color:var(--gold);font-variant-numeric:tabular-nums;white-space:nowrap;text-align:right}
+.item .add{
+  grid-column:-2/-1;justify-self:end;
+  display:inline-flex;align-items:center;justify-content:center;gap:6px;
+  min-width:44px;min-height:44px;padding:0 14px;margin-top:6px;
+  background:transparent;border:1px solid var(--gold);border-radius:2px;color:var(--gold);
+  cursor:pointer;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+  transition:all .2s var(--e);
+}
+.item .add:hover{background:var(--gold);color:#14110B}
+.item .add.posto{background:var(--gold);color:#14110B}
+.item .add svg{width:15px;height:15px}
+.vazio{text-align:center;padding:60px 20px;color:var(--txt-soft);font-family:'Cormorant Garamond',serif;font-size:18px;display:none}
+.vazio.on{display:block}
+
+/* ---------- botão da sacola ---------- */
+.sacola-btn{
+  position:fixed;left:50%;transform:translateX(-50%) translateY(120%);
+  bottom:16px;z-index:115;width:min(560px,calc(100% - 24px));
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  min-height:56px;padding:0 18px;border:0;border-radius:3px;cursor:pointer;
+  background:var(--gold);color:#14110B;font-weight:700;letter-spacing:.06em;
+  box-shadow:0 10px 34px rgba(0,0,0,.6);transition:transform .35s var(--e);
+}
+.sacola-btn.on{transform:translateX(-50%) translateY(0)}
+.sacola-btn .qt{display:inline-flex;align-items:center;gap:8px;font-size:12px;text-transform:uppercase}
+.sacola-btn .qt i{
+  display:inline-flex;align-items:center;justify-content:center;font-style:normal;
+  min-width:24px;height:24px;padding:0 6px;border-radius:100px;background:#14110B;color:var(--gold);font-size:12px;
+}
+.sacola-btn .tot{font-family:'Cinzel',serif;font-size:16px;font-variant-numeric:tabular-nums}
+
+/* ---------- painel / modal ---------- */
+.tela{
+  position:fixed;inset:0;z-index:130;display:none;
+  background:rgba(6,6,5,.72);backdrop-filter:blur(4px);
+}
+.tela.on{display:flex;align-items:flex-end;justify-content:center}
+@media(min-width:760px){.tela.on{align-items:center}}
+.painel{
+  width:min(620px,100%);max-height:92vh;overflow-y:auto;
+  background:var(--surface);border:1px solid var(--line);
+  border-radius:6px 6px 0 0;
+}
+@media(min-width:760px){.painel{border-radius:4px}}
+.painel-hd{
+  position:sticky;top:0;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:16px clamp(14px,4vw,24px);background:var(--surface);border-bottom:1px solid var(--line);
+}
+.painel-hd h3{font-family:'Cinzel',serif;font-weight:500;font-size:16px;letter-spacing:.08em;color:var(--cream)}
+.fechar{width:44px;height:44px;display:flex;align-items:center;justify-content:center;background:none;border:0;cursor:pointer;color:var(--txt-mute)}
+.fechar svg{width:20px;height:20px}
+.painel-bd{padding:clamp(14px,4vw,24px)}
+
+.linha{display:grid;grid-template-columns:1fr auto auto;gap:12px;align-items:center;padding:13px 0;border-bottom:1px solid var(--line)}
+.linha .n{font-family:'Cinzel',serif;font-size:14.5px;color:var(--cream);line-height:1.35}
+.linha .p{font-family:'Cinzel',serif;font-size:14.5px;color:var(--gold);font-variant-numeric:tabular-nums;white-space:nowrap}
+.qtd{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:2px}
+.qtd button{width:38px;height:38px;background:none;border:0;cursor:pointer;color:var(--gold);font-size:18px;line-height:1}
+.qtd button:hover{background:rgba(201,169,110,.12)}
+.qtd span{min-width:30px;text-align:center;font-variant-numeric:tabular-nums;font-size:14px}
+
+.somas{margin-top:18px;padding-top:14px;border-top:1px solid var(--line)}
+.somas div{display:flex;justify-content:space-between;gap:12px;padding:5px 0;color:var(--txt-soft);font-size:14px}
+.somas div.total{
+  margin-top:8px;padding-top:12px;border-top:1px solid var(--line);
+  font-family:'Cinzel',serif;font-size:19px;color:var(--gold);font-variant-numeric:tabular-nums;
+}
+
+.campo{margin-bottom:15px}
+.campo label{display:block;font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:7px;font-weight:600}
+.campo input,.campo textarea{
+  width:100%;min-height:48px;padding:12px 14px;font-size:16px;color:var(--cream);
+  background:var(--surface-2);border:1px solid var(--line);border-radius:2px;
+}
+.campo textarea{min-height:82px;resize:vertical;font-family:'Raleway',sans-serif}
+.campo input:focus,.campo textarea:focus{border-color:var(--gold);outline:none}
+.campo .erro{display:none;margin-top:6px;font-size:12.5px;color:#F0846B}
+.campo.ruim input,.campo.ruim textarea{border-color:#F0846B}
+.campo.ruim .erro{display:block}
+.dupla{display:grid;gap:15px}
+@media(min-width:520px){.dupla{grid-template-columns:1fr 1fr}}
+
+.opcoes{display:grid;gap:9px;margin-bottom:18px}
+@media(min-width:460px){.opcoes.tres{grid-template-columns:repeat(3,1fr)}.opcoes.dois{grid-template-columns:repeat(2,1fr)}}
+.opcoes button{
+  min-height:52px;padding:10px 12px;cursor:pointer;text-align:center;
+  background:var(--surface-2);border:1px solid var(--line);border-radius:2px;color:var(--txt-soft);
+  font-size:12px;letter-spacing:.06em;transition:all .2s var(--e);
+}
+.opcoes button:hover{border-color:var(--gold)}
+.opcoes button.on{border-color:var(--gold);background:rgba(201,169,110,.14);color:var(--gold-light);font-weight:600}
+.opcoes button small{display:block;margin-top:3px;font-size:10.5px;color:var(--txt-mute);letter-spacing:0}
+
+.btn-principal{
+  width:100%;min-height:54px;margin-top:6px;cursor:pointer;
+  background:var(--gold);color:#14110B;border:0;border-radius:2px;
+  font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  transition:background .2s var(--e);
+}
+.btn-principal:hover{background:var(--gold-light)}
+.btn-principal svg{width:18px;height:18px}
+.btn-texto{
+  width:100%;min-height:48px;margin-top:10px;background:none;border:0;cursor:pointer;
+  color:var(--txt-mute);font-size:12px;letter-spacing:.08em;text-transform:uppercase;
+}
+.btn-texto:hover{color:var(--gold-light)}
+
+.aviso{
+  display:flex;gap:10px;align-items:flex-start;
+  margin:16px 0 4px;padding:12px 14px;border-left:2px solid var(--demo);
+  background:rgba(224,160,58,.09);
+  font-family:'Cormorant Garamond',serif;font-size:15px;line-height:1.5;color:var(--txt-soft);
+}
+.aviso svg{width:17px;height:17px;color:var(--demo);flex:none;margin-top:3px}
+
+.ok-tela{text-align:center;padding:12px 0}
+.ok-tela .selo{width:62px;height:62px;margin:0 auto 18px;border:1px solid var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center}
+.ok-tela .selo svg{width:28px;height:28px;color:var(--gold)}
+.ok-tela h4{font-family:'Cinzel',serif;font-weight:500;font-size:19px;color:var(--cream);margin-bottom:10px;letter-spacing:.05em}
+.ok-tela p{font-family:'Cormorant Garamond',serif;font-size:16.5px;color:var(--txt-soft);margin-bottom:6px}
+.resumo{
+  margin:18px 0;padding:14px;background:var(--surface-2);border:1px solid var(--line);
+  text-align:left;font-family:'Cormorant Garamond',serif;font-size:14.5px;color:var(--txt-soft);
+  white-space:pre-wrap;max-height:220px;overflow-y:auto;line-height:1.55;
+}
+
+footer{margin-top:60px;padding:26px 16px 12px;border-top:1px solid var(--line);text-align:center;font-size:12px;color:var(--txt-mute)}
+footer a{color:var(--gold)}
+
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<div class="demo-bar">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M12 9v4M12 17h.01"/><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg>
+  <span>Demonstração &middot; nenhum pedido é processado</span>
+</div>
+
+<header class="hd">
+  <a class="mark" href="index.html">
+    <img src="LOGO1.webp" alt="">
+    <span>Villa Cascais</span>
+  </a>
+  <a class="voltar" href="cardapio.html">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 4h16v16H4z"/><path d="M8 9h8M8 13h8M8 17h5"/></svg>
+    Cardápio
+  </a>
+</header>
+
+<div style="height:calc(var(--demo-h) + var(--head-h))"></div>
+
+<div class="bar">
+  <div class="bar-in">
+    <div class="search">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+      <label for="q" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Buscar prato</label>
+      <input id="q" type="search" placeholder="Buscar prato ou ingrediente..." autocomplete="off">
+    </div>
+  </div>
+  <nav class="cats" id="cats" aria-label="Categorias"></nav>
+</div>
+
+<main id="lista"></main>
+<div class="vazio" id="vazio">Nada encontrado. Tente outro termo.</div>
+
+<footer>
+  Villa Cascais &middot; Av. Santos Dumont, 763 &middot; Uberaba MG<br>
+  Desenvolvido por <a href="https://zebubit.com.br" target="_blank" rel="noopener">Zebubit Assessoria</a>
+</footer>
+
+<button class="sacola-btn" id="sacolaBtn" aria-label="Abrir sacola">
+  <span class="qt"><i id="sacolaQt">0</i> ver sacola</span>
+  <span class="tot" id="sacolaTot">R$ 0</span>
+</button>
+
+<!-- SACOLA -->
+<div class="tela" id="telaSacola">
+  <div class="painel">
+    <div class="painel-hd">
+      <h3>A sua sacola</h3>
+      <button class="fechar" data-fecha="telaSacola" aria-label="Fechar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+    </div>
+    <div class="painel-bd">
+      <div id="sacolaItens"></div>
+      <div class="somas" id="sacolaSomas"></div>
+      <button class="btn-principal" id="irDados">Continuar</button>
+      <button class="btn-texto" data-fecha="telaSacola">Continuar escolhendo</button>
+    </div>
+  </div>
+</div>
+
+<!-- DADOS -->
+<div class="tela" id="telaDados">
+  <div class="painel">
+    <div class="painel-hd">
+      <h3>Os seus dados</h3>
+      <button class="fechar" data-fecha="telaDados" aria-label="Fechar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+    </div>
+    <div class="painel-bd">
+      <div class="opcoes dois" id="opModo">
+        <button data-modo="entrega" class="on">Entrega<small>taxa R$ 18</small></button>
+        <button data-modo="retirada">Retirada<small>sem taxa</small></button>
+      </div>
+
+      <div class="dupla">
+        <div class="campo" id="cNome">
+          <label for="fNome">Nome</label>
+          <input id="fNome" type="text" maxlength="120" autocomplete="name" placeholder="Como devemos chamá-lo">
+          <div class="erro">Diga-nos o seu nome.</div>
+        </div>
+        <div class="campo" id="cTel">
+          <label for="fTel">Telefone</label>
+          <input id="fTel" type="tel" inputmode="tel" maxlength="16" autocomplete="tel" placeholder="(34) 99999-9999">
+          <div class="erro">Telefone incompleto.</div>
+        </div>
+      </div>
+
+      <div id="blocoEndereco">
+        <div class="campo" id="cEnd">
+          <label for="fEnd">Endereço da entrega</label>
+          <input id="fEnd" type="text" maxlength="160" autocomplete="street-address" placeholder="Rua, número e bairro">
+          <div class="erro">Precisamos do endereço para entregar.</div>
+        </div>
+        <div class="campo">
+          <label for="fCompl">Complemento <span style="color:var(--txt-mute);letter-spacing:0;text-transform:none">(opcional)</span></label>
+          <input id="fCompl" type="text" maxlength="80" placeholder="Apartamento, bloco, referência">
+        </div>
+      </div>
+
+      <div class="campo">
+        <label for="fObs">Observações <span style="color:var(--txt-mute);letter-spacing:0;text-transform:none">(opcional)</span></label>
+        <textarea id="fObs" maxlength="300" placeholder="Sem coentros, ponto da carne, alergias..."></textarea>
+      </div>
+
+      <label style="display:block;font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:9px;font-weight:600">Como prefere pagar</label>
+      <div class="opcoes tres" id="opPag">
+        <button data-pag="Pix" class="on">Pix</button>
+        <button data-pag="Cartão na entrega">Cartão<small>na entrega</small></button>
+        <button data-pag="Dinheiro">Dinheiro</button>
+      </div>
+
+      <div class="aviso">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 9v4M12 17h.01"/><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg>
+        <span>Esta é uma demonstração. Nesta versão o pedido é enviado pelo WhatsApp e <strong>nenhuma cobrança acontece</strong>. O Pix automático entra quando o sistema for ativado.</span>
+      </div>
+
+      <button class="btn-principal" id="fecharPedido">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.67.15-.2.3-.77.96-.94 1.16-.17.2-.35.22-.64.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.75-1.65-2.05-.17-.3-.02-.46.13-.6.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.6-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.01-1.04 2.47s1.06 2.86 1.21 3.06c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.63.71.23 1.36.19 1.87.12.57-.09 1.75-.72 2-1.41.25-.69.25-1.28.17-1.41-.07-.13-.27-.2-.57-.35zM12 2a10 10 0 0 0-8.6 15.1L2 22l5.05-1.32A10 10 0 1 0 12 2z"/></svg>
+        Enviar pedido pelo WhatsApp
+      </button>
+      <button class="btn-texto" id="voltarSacola">Voltar à sacola</button>
+    </div>
+  </div>
+</div>
+
+<!-- CONFIRMAÇÃO -->
+<div class="tela" id="telaOk">
+  <div class="painel">
+    <div class="painel-hd">
+      <h3>Pedido enviado</h3>
+      <button class="fechar" data-fecha="telaOk" aria-label="Fechar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+    </div>
+    <div class="painel-bd">
+      <div class="ok-tela">
+        <div class="selo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg></div>
+        <h4>Tudo certo</h4>
+        <p>Abrimos o WhatsApp com o seu pedido escrito. É só tocar em enviar.</p>
+        <div class="resumo" id="resumoFinal"></div>
+        <button class="btn-principal" id="abrirZapDeNovo">Abrir o WhatsApp outra vez</button>
+        <button class="btn-texto" id="novoPedido">Fazer outro pedido</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="cardapio-dados.js"></script>
+<script>
+/* ============================================================
+   PEDIDO — DEMONSTRAÇÃO
+   Sem servidor, sem Mercado Pago, sem banco. O pedido é montado
+   aqui e entregue ao cliente já escrito no WhatsApp do restaurante.
+   Preços vêm de cardapio-dados.js, que é a fonte única.
+   ============================================================ */
+const ZAP='5534999473287';
+const TAXA=18;              // provisório: mesma taxa do Mangiare em Uberaba
+const CHAVE='vc_sacola_demo';
+
+const brl=v=>'R$ '+v.toLocaleString('pt-BR',{minimumFractionDigits:0});
+const esc=s=>String(s).replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]));
+
+/* Só o que pode sair de casa. Ausência de "entrega" significa liberado. */
+const CATALOGO=[];
+MENU.forEach(sec=>{
+  const junta=(itens,titulo)=>{
+    const ok=(itens||[]).filter(i=>i.entrega!==false);
+    if(ok.length) CATALOGO.push({id:sec.id+(titulo?'-2':''),t:titulo||sec.t,itens:ok});
+  };
+  junta(sec.it,null);
+  if(sec.it2) junta(sec.it2,sec.sub2);
+});
+
+/* ---------- sacola ---------- */
+let sacola={};
+try{ sacola=JSON.parse(localStorage.getItem(CHAVE)||'{}'); }catch(e){ sacola={}; }
+let modo='entrega', pagamento='Pix', ultimaMsg='';
+
+const acharItem=cod=>{
+  for(const g of CATALOGO){ const i=g.itens.find(x=>x.c===cod); if(i) return i; }
+  return null;
+};
+const guardar=()=>{ try{ localStorage.setItem(CHAVE,JSON.stringify(sacola)); }catch(e){} };
+const contar=()=>Object.values(sacola).reduce((a,b)=>a+b,0);
+const subtotal=()=>Object.entries(sacola).reduce((s,[c,q])=>{const i=acharItem(c);return s+(i?i.p*q:0);},0);
+const taxaAtual=()=>(modo==='entrega'&&contar())?TAXA:0;
+const total=()=>subtotal()+taxaAtual();
+
+/* ---------- montar a lista ---------- */
+document.getElementById('lista').innerHTML=CATALOGO.map(g=>`
+  <section class="grupo" id="g-${g.id}">
+    <h2>${esc(g.t)}</h2><div class="tile"></div>
+    ${g.itens.map(i=>`
+      <div class="item ${i.img?'com-foto':''}" data-b="${esc((i.c+' '+i.n+' '+i.d).toLowerCase())}">
+        ${i.img?`<img class="foto" src="${i.img}" alt="${esc(i.alt||i.n)}" loading="lazy" width="88" height="88">`:''}
+        <div class="nome"><b>${esc(i.c)}</b>${esc(i.n)}</div>
+        <div class="preco">${brl(i.p)}</div>
+        ${i.d?`<div class="desc">${esc(i.d)}</div>`:''}
+        <button class="add" data-add="${esc(i.c)}" aria-label="Adicionar ${esc(i.n)}">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+          Juntar
+        </button>
+      </div>`).join('')}
+  </section>`).join('');
+
+document.getElementById('cats').innerHTML=CATALOGO.map(g=>`<button data-ir="g-${g.id}">${esc(g.t)}</button>`).join('');
+
+/* ---------- interações da lista ---------- */
+document.getElementById('lista').addEventListener('click',e=>{
+  const b=e.target.closest('[data-add]'); if(!b) return;
+  const c=b.dataset.add;
+  sacola[c]=(sacola[c]||0)+1; guardar(); pintarBotao();
+  b.classList.add('posto'); setTimeout(()=>b.classList.remove('posto'),450);
+});
+
+document.getElementById('cats').addEventListener('click',e=>{
+  const b=e.target.closest('[data-ir]'); if(!b) return;
+  document.querySelectorAll('.cats button').forEach(x=>x.classList.toggle('on',x===b));
+  document.getElementById(b.dataset.ir)?.scrollIntoView({behavior:'smooth',block:'start'});
+});
+
+/* ---------- busca ---------- */
+const q=document.getElementById('q'), vazio=document.getElementById('vazio');
+let tmr;
+q.addEventListener('input',()=>{clearTimeout(tmr);tmr=setTimeout(()=>{
+  const t=q.value.trim().toLowerCase(); let achou=0;
+  document.querySelectorAll('.grupo').forEach(g=>{
+    let n=0;
+    g.querySelectorAll('[data-b]').forEach(el=>{
+      const ok=!t||el.dataset.b.includes(t);
+      el.style.display=ok?'':'none'; if(ok)n++;
+    });
+    g.style.display=(!t||n)?'':'none'; achou+=n;
+  });
+  vazio.classList.toggle('on',!!t&&!achou);
+},150)});
+
+/* ---------- botão flutuante ---------- */
+function pintarBotao(){
+  const n=contar();
+  document.getElementById('sacolaQt').textContent=n;
+  document.getElementById('sacolaTot').textContent=brl(total());
+  document.getElementById('sacolaBtn').classList.toggle('on',n>0);
+}
+
+/* ---------- desenhar a sacola ---------- */
+function desenharSacola(){
+  const cods=Object.keys(sacola).filter(c=>sacola[c]>0);
+  const alvo=document.getElementById('sacolaItens');
+  if(!cods.length){
+    alvo.innerHTML='<p style="padding:26px 0;text-align:center;color:var(--txt-mute);font-family:Cormorant Garamond,serif;font-size:17px">A sacola está vazia.</p>';
+    document.getElementById('sacolaSomas').innerHTML='';
+    document.getElementById('irDados').style.display='none';
+    return;
+  }
+  document.getElementById('irDados').style.display='';
+  alvo.innerHTML=cods.map(c=>{
+    const i=acharItem(c); if(!i) return '';
+    return `<div class="linha">
+      <div class="n">${esc(i.n)}<br><span style="color:var(--txt-mute);font-family:Raleway,sans-serif;font-size:12px">${brl(i.p)} cada</span></div>
+      <div class="qtd">
+        <button data-menos="${esc(c)}" aria-label="Tirar um">&minus;</button>
+        <span>${sacola[c]}</span>
+        <button data-mais="${esc(c)}" aria-label="Juntar um">+</button>
+      </div>
+      <div class="p">${brl(i.p*sacola[c])}</div>
+    </div>`;
+  }).join('');
+  document.getElementById('sacolaSomas').innerHTML=`
+    <div><span>Subtotal</span><span>${brl(subtotal())}</span></div>
+    ${taxaAtual()?`<div><span>Entrega em Uberaba</span><span>${brl(taxaAtual())}</span></div>`:''}
+    <div class="total"><span>Total</span><span>${brl(total())}</span></div>`;
+}
+
+document.getElementById('sacolaItens').addEventListener('click',e=>{
+  const mais=e.target.closest('[data-mais]'), menos=e.target.closest('[data-menos]');
+  if(mais){ sacola[mais.dataset.mais]++; }
+  else if(menos){ const c=menos.dataset.menos; sacola[c]--; if(sacola[c]<=0) delete sacola[c]; }
+  else return;
+  guardar(); desenharSacola(); pintarBotao();
+});
+
+/* ---------- telas ---------- */
+const abrir=id=>{document.getElementById(id).classList.add('on');document.body.style.overflow='hidden'};
+const fechar=id=>{document.getElementById(id).classList.remove('on');document.body.style.overflow=''};
+document.querySelectorAll('[data-fecha]').forEach(b=>b.addEventListener('click',()=>fechar(b.dataset.fecha)));
+document.querySelectorAll('.tela').forEach(t=>t.addEventListener('click',e=>{if(e.target===t)fechar(t.id)}));
+addEventListener('keydown',e=>{if(e.key==='Escape')document.querySelectorAll('.tela.on').forEach(t=>fechar(t.id))});
+
+document.getElementById('sacolaBtn').addEventListener('click',()=>{desenharSacola();abrir('telaSacola')});
+document.getElementById('irDados').addEventListener('click',()=>{fechar('telaSacola');abrir('telaDados')});
+document.getElementById('voltarSacola').addEventListener('click',()=>{fechar('telaDados');desenharSacola();abrir('telaSacola')});
+
+/* ---------- entrega x retirada / pagamento ---------- */
+document.getElementById('opModo').addEventListener('click',e=>{
+  const b=e.target.closest('[data-modo]'); if(!b) return;
+  modo=b.dataset.modo;
+  document.querySelectorAll('#opModo button').forEach(x=>x.classList.toggle('on',x===b));
+  document.getElementById('blocoEndereco').style.display=(modo==='entrega')?'':'none';
+  pintarBotao();
+});
+document.getElementById('opPag').addEventListener('click',e=>{
+  const b=e.target.closest('[data-pag]'); if(!b) return;
+  pagamento=b.dataset.pag;
+  document.querySelectorAll('#opPag button').forEach(x=>x.classList.toggle('on',x===b));
+});
+
+/* ---------- validação e envio ---------- */
+function valida(){
+  let ok=true;
+  const marca=(id,bom)=>{document.getElementById(id).classList.toggle('ruim',!bom); if(!bom)ok=false;};
+  marca('cNome', document.getElementById('fNome').value.trim().length>=2);
+  marca('cTel',  document.getElementById('fTel').value.replace(/\D/g,'').length>=10);
+  if(modo==='entrega') marca('cEnd', document.getElementById('fEnd').value.trim().length>=6);
+  else document.getElementById('cEnd').classList.remove('ruim');
+  if(!ok) document.querySelector('.campo.ruim input')?.focus();
+  return ok;
+}
+
+function montarMensagem(){
+  const nome=document.getElementById('fNome').value.trim();
+  const tel=document.getElementById('fTel').value.trim();
+  const end=document.getElementById('fEnd').value.trim();
+  const compl=document.getElementById('fCompl').value.trim();
+  const obs=document.getElementById('fObs').value.trim();
+  const linhas=Object.keys(sacola).filter(c=>sacola[c]>0).map(c=>{
+    const i=acharItem(c); return `• ${sacola[c]}x ${i.n} — ${brl(i.p*sacola[c])}`;
+  });
+  let m='*PEDIDO — VILLA CASCAIS*\n';
+  m+='_(enviado pelo cardápio digital)_\n\n';
+  m+=linhas.join('\n')+'\n\n';
+  m+=`Subtotal: ${brl(subtotal())}\n`;
+  if(taxaAtual()) m+=`Entrega: ${brl(taxaAtual())}\n`;
+  m+=`*TOTAL: ${brl(total())}*\n\n`;
+  m+=`Nome: ${nome}\nTelefone: ${tel}\n`;
+  m+=modo==='entrega' ? `Entrega em: ${end}${compl?' — '+compl:''}\n` : 'Vou retirar no restaurante\n';
+  m+=`Pagamento: ${pagamento}\n`;
+  if(obs) m+=`\nObservações: ${obs}\n`;
+  return m;
+}
+
+let enviando=false;
+document.getElementById('fecharPedido').addEventListener('click',()=>{
+  if(enviando) return;              // trava: o bug do Mangiare foi clique duplo
+  if(!contar()){ fechar('telaDados'); return; }
+  if(!valida()) return;
+  enviando=true;
+  ultimaMsg=montarMensagem();
+  window.open(`https://wa.me/${ZAP}?text=${encodeURIComponent(ultimaMsg)}`,'_blank','noopener');
+  document.getElementById('resumoFinal').textContent=ultimaMsg.replace(/\*/g,'').replace(/_/g,'');
+  fechar('telaDados'); abrir('telaOk');
+  enviando=false;
+});
+
+document.getElementById('abrirZapDeNovo').addEventListener('click',()=>{
+  window.open(`https://wa.me/${ZAP}?text=${encodeURIComponent(ultimaMsg)}`,'_blank','noopener');
+});
+document.getElementById('novoPedido').addEventListener('click',()=>{
+  sacola={}; guardar(); pintarBotao(); fechar('telaOk');
+  ['fNome','fTel','fEnd','fCompl','fObs'].forEach(id=>document.getElementById(id).value='');
+  scrollTo({top:0,behavior:'smooth'});
+});
+
+pintarBotao();
+</script>
+</body>
+</html>
