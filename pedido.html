@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="format-detection" content="telephone=no">
 <title>Pedido · Villa Cascais — DEMONSTRAÇÃO</title>
 <meta name="robots" content="noindex,nofollow">
 <meta name="theme-color" content="#0A0A08">
@@ -22,7 +23,8 @@
   --head-h:60px; --demo-h:34px;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{-webkit-text-size-adjust:100%}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden;max-width:100%}
+a[href^="tel:"]{color:var(--gold)!important;text-decoration:none!important}
 body{
   background:var(--dark);color:var(--txt);
   font-family:'Raleway',system-ui,sans-serif;font-size:16px;line-height:1.6;

@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="format-detection" content="telephone=no">
 <title>Villa Cascais | Culinária Portuguesa · Uberaba MG</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400;1,600&family=Cinzel:wght@400;500;600&family=Raleway:wght@300;400;500&display=swap" rel="stylesheet"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
@@ -10,7 +11,14 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{--gold:#C9A96E;--gold-light:#E8D5A3;--cream:#FAF7F0;--dark:#0A0A08;--navy:#1B2A4A}
-html{scroll-behavior:smooth}
+/* overflow-x precisa estar no HTML também: só no body ele vaza e a
+   tela "dança" de lado no telemóvel (as animações reveal começam
+   deslocadas 30px e escapam do recorte do body). */
+html{scroll-behavior:smooth;overflow-x:hidden;max-width:100%}
+
+/* O iOS transforma número de telefone em link azul sublinhado por
+   conta própria. Sobre fundo preto fica ilegível. */
+a[href^="tel:"],a[href^="TEL:"]{color:var(--gold)!important;text-decoration:none!important}
 body{font-family:'Raleway',sans-serif;background:var(--dark);color:var(--cream);overflow-x:hidden;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility}
 
 /* INTRO */
@@ -556,6 +564,25 @@ footer{padding:3.5rem 8vw;background:#080808;border-top:1px solid rgba(201,169,1
   #ambiente{padding:7rem 5vw}
   .reserva-contact{gap:1.5rem}
 }
+
+/* ---- telemóvel estreito: a barra de cima estava a saltar para fora ----
+   Em 320-480px o conteúdo da nav media 306px numa faixa útil de 208px,
+   e o "Reservar Mesa" saía da tela. Aqui encolhe tudo e cabe. */
+@media(max-width:520px){
+  nav{padding:.9rem 1rem}
+  .nav-right{gap:.55rem;flex-wrap:nowrap;min-width:0}
+  .nav-logo{height:32px}
+  .nav-icon{width:38px;height:38px}
+  .nav-icon svg{width:19px;height:19px}
+  .nav-cta{padding:.72rem .9rem;font-size:.55rem;letter-spacing:.14em}
+  .redes-btn{max-width:100%;font-size:.62rem;letter-spacing:.1em;
+             overflow-wrap:anywhere;white-space:normal;text-align:center;min-height:52px}
+}
+@media(max-width:380px){
+  /* a bandeira é decorativa: some antes de espremer o botão */
+  .nav-right > svg[viewBox="0 0 900 600"]{display:none}
+  .nav-cta{padding:.7rem .75rem;font-size:.52rem}
+}
 @media(max-width:768px){
   #wall-label{padding:2.5rem 2rem;backdrop-filter:blur(16px) brightness(.55);-webkit-backdrop-filter:blur(16px) brightness(.55)}
   .wl-name{font-size:clamp(1.9rem,8vw,3.2rem);letter-spacing:.3em}
@@ -712,6 +739,57 @@ footer{padding:3.5rem 8vw;background:#080808;border-top:1px solid rgba(201,169,1
 @media(max-width:600px){
   .redes-btns{flex-direction:column;align-items:center}
   .redes-btn{width:100%;max-width:320px;justify-content:center}
+}
+
+/* ============================================================
+   LEGIBILIDADE — auditado em 30/07/2026
+   O contraste do site já estava bom (8,8:1 a 19,8:1, o mínimo
+   é 4,5:1). O problema era o TAMANHO: rótulos e botões estavam
+   entre 8,8px e 10,9px, em maiúsculas com espaçamento largo,
+   que é a combinação mais difícil de ler no telemóvel.
+   Aqui o piso passa a ~11,5px e o espaçamento entre letras cede
+   um pouco, para a letra crescer sem a linha estourar a caixa.
+   ============================================================ */
+.hpre,.hero-flag-lbl,.wl-flag-lbl,.sec-label,.end-lbl,
+.redes-eyebrow,.tipica-card-cat,.dish-num,.loc-lbl,.reserva-lbl{
+  font-size:.72rem!important;letter-spacing:.2em!important;
+}
+.bgold,.boutline,.loc-btn-primary,.loc-btn-secondary,
+.map-btn-primary,.map-btn-secondary,.redes-btn,.tab-btn{
+  font-size:.74rem!important;letter-spacing:.16em!important;
+}
+.nav-cta{font-size:.72rem!important;letter-spacing:.13em!important}
+.nav-links a{font-size:.76rem!important}
+.scroll-hint,.scroll-hint span,.hscroll,.hscroll span{font-size:.72rem!important}
+/* segunda leva: localização, formulário, parceiros e rodapé */
+.loc-label,.loc-map-hint,.contact-label,.parceiros-label,.parceiro-type,
+.form-group label,.reserva-form label{
+  font-size:.72rem!important;letter-spacing:.18em!important;
+}
+.form-submit{font-size:.76rem!important;letter-spacing:.16em!important}
+.footer-copy,.footer-addr,.footer-dev,.footer-dev a,footer a{
+  font-size:.76rem!important;letter-spacing:.06em!important;
+}
+#hint span,.scroll-arrow span{font-size:.72rem!important;letter-spacing:.18em!important}
+/* "Descobrir" era o único abaixo do mínimo de contraste (4,98:1) */
+.scroll-arrow span{color:rgba(201,169,110,.95)!important}
+/* modal do mapa */
+.map-modal-sub,.map-info-lbl{font-size:.72rem!important;letter-spacing:.16em!important}
+/* Política de Privacidade e Termos estavam em 3,58:1 — abaixo do
+   mínimo de 4,5:1. Era o ÚNICO contraste realmente reprovado do site. */
+.footer-legal a,footer a[href*="politica"],footer a[href*="termos"]{
+  color:rgba(250,247,240,.82)!important;
+}
+
+@media(max-width:520px){
+  /* na faixa estreita a letra continua legível: quem cede é o
+     espaçamento e o preenchimento, não o tamanho da fonte */
+  .nav-cta{font-size:.7rem!important;letter-spacing:.08em!important;padding:.72rem .8rem}
+  .nav-right{gap:.45rem}
+  /* com a fonte maior estes rótulos passaram a quebrar em duas linhas
+     e a bandeira ficava solta ao lado. Aqui o bloco inteiro centra. */
+  .hero-flag,.wl-flag{flex-wrap:wrap;justify-content:center;text-align:center;gap:.5rem}
+  .hero-flag-lbl,.wl-flag-lbl{letter-spacing:.14em!important;line-height:1.5}
 }
 </style>
 </head>
