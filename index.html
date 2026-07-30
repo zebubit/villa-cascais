@@ -118,7 +118,7 @@ nav.visible{opacity:1}
 #hero.revealed .hc{opacity:1;transform:translateY(0)}
 .hpre{font-size:.62rem;letter-spacing:.55em;color:var(--gold);text-transform:uppercase;margin-bottom:1.5rem;display:flex;align-items:center;justify-content:center;gap:1.2rem}
 .hpre::before,.hpre::after{content:'';width:45px;height:1px;background:var(--gold);opacity:.55}
-.hlogo{height:125px;width:auto;margin-bottom:1rem;filter:drop-shadow(0 4px 24px rgba(0,0,0,.8))}
+.hlogo{width:clamp(230px,40vw,380px);height:auto;aspect-ratio:1519/868;object-fit:contain;margin-bottom:1.4rem;filter:drop-shadow(0 8px 30px rgba(0,0,0,.85))}
 .htitle{font-family:'Cormorant Garamond',serif;font-size:clamp(4rem,9vw,9.5rem);font-weight:300;color:#FAF7F0;line-height:.85;letter-spacing:.02em;margin-bottom:.4rem;text-shadow:0 1px 2px rgba(0,0,0,.45),0 3px 12px rgba(0,0,0,.28)}
 .htitle em{font-style:italic;color:var(--gold-light)}
 .hero-flag{display:flex;align-items:center;justify-content:center;gap:.8rem;margin:.4rem 0 1.4rem}
@@ -373,7 +373,7 @@ footer{padding:3.5rem 8vw;background:#080808;border-top:1px solid rgba(201,169,1
 .footer-inner{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:2rem;margin-bottom:2rem}
 .footer-copy{font-size:.68rem;letter-spacing:.15em;color:rgba(250,247,240,.92);text-transform:uppercase;line-height:1.8}
 .footer-copy strong{color:rgba(201,169,110,.9)}
-.footer-logo{height:80px;width:auto;opacity:.8;margin:0 auto;display:block}
+.footer-logo{width:min(240px,70%);height:auto;aspect-ratio:1519/868;object-fit:contain;opacity:.8;margin:0 auto;display:block}
 .footer-social{display:flex;gap:1.8rem;justify-content:flex-end;flex-wrap:wrap}
 .footer-social a{font-size:.64rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(201,169,110,.92);text-decoration:none;transition:color .3s}
 .footer-social a:hover{color:var(--gold)}
@@ -544,7 +544,7 @@ footer{padding:3.5rem 8vw;background:#080808;border-top:1px solid rgba(201,169,1
   .tab-btn{padding:.9rem .9rem;font-size:.54rem;letter-spacing:.22em}
   #endereco-banner{gap:1.5rem}
   .end-sep{display:none}
-  .hlogo{height:78px}
+  .hlogo{width:min(255px,72vw)}
   .htitle{font-size:clamp(3.5rem,12vw,6.5rem)}
   .hacts{gap:.8rem}
   .bgold,.boutline{padding:.95rem 2rem}
@@ -1122,7 +1122,8 @@ footer{padding:3.5rem 8vw;background:#080808;border-top:1px solid rgba(201,169,1
 
 <script>
 // IMAGENS — paths relativos
-const LOGO_SRC='LOGO1.webp';
+const LOGO_SRC='LOGO1.webp';             // brasão compacto: nav e modal do mapa
+const AZULEJO_SRC='AZULEJO-LOGO-sm.webp'; // azulejo oficial da marca: hero e rodapé
 const CAPA_SRC='CAPA.webp';
 const IMGS={
   bolinho:'BOLINHO.webp',
@@ -1145,9 +1146,9 @@ const IMGS={
 };
 
 // SET DOM
-document.getElementById('heroLogo').src=LOGO_SRC;
+document.getElementById('heroLogo').src=AZULEJO_SRC;
 document.getElementById('navLogo').src=LOGO_SRC;
-document.getElementById('footerLogo').src=LOGO_SRC;
+document.getElementById('footerLogo').src=AZULEJO_SRC;
 document.getElementById('mapLogo').src=LOGO_SRC;
 document.getElementById('heroBg').style.backgroundImage="url('"+CAPA_SRC+"')";
 document.getElementById('ambMain').src=IMGS.polvo;
