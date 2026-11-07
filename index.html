@@ -155,9 +155,9 @@ nav.visible{opacity:1}
 #quote{padding:10rem 8vw;background:var(--navy);position:relative;overflow:hidden;text-align:center}
 #quote::before{content:'';position:absolute;inset:0;z-index:2;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23C9A96E' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/svg%3E");pointer-events:none}
 /* vídeo bg */
-.quote-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;opacity:.28;mix-blend-mode:luminosity;pointer-events:none}
+.quote-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;opacity:.75;pointer-events:none}
 /* véu escuro sobre o vídeo para manter legibilidade */
-.quote-veil{position:absolute;inset:0;z-index:1;background:linear-gradient(to bottom,rgba(18,14,8,.6) 0%,rgba(10,10,8,.5) 100%);pointer-events:none}
+.quote-veil{position:absolute;inset:0;z-index:1;background:linear-gradient(to bottom,rgba(18,14,8,.45) 0%,rgba(10,10,8,.4) 100%);pointer-events:none}
 /* textos ficam acima de tudo */
 .quote-text{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(1.8rem,3.5vw,3.6rem);font-weight:300;color:#FAF7F0;line-height:1.35;max-width:780px;margin:0 auto 2rem;position:relative;z-index:3;text-shadow:0 2px 18px rgba(0,0,0,.65),0 0 60px rgba(0,0,0,.4)}
 .quote-text::before{content:'\201C';font-size:7rem;color:var(--gold);opacity:.25;position:absolute;top:-2.5rem;left:-1.5rem;font-style:normal;line-height:1}
@@ -913,10 +913,7 @@ footer{padding:3.5rem 8vw;background:#080808;border-top:1px solid rgba(201,169,1
 </div>
 
 <section id="quote">
-  <video class="quote-video" autoplay muted loop playsinline preload="metadata">
-    <source src="vid2.mov" type="video/mp4">
-    <source src="vid2.mov" type="video/quicktime">
-  </video>
+  <img class="quote-video" src="BACALHAUU.webp" alt="" loading="lazy">
   <div class="quote-veil"></div>
   <p class="quote-text reveal-scale">"Sinta a essência de Portugal em cada detalhe. Uma jornada de sofisticação através dos sabores da alta gastronomia lusitana."</p>
   <div class="quote-attr reveal">François de La Rochefoucauld</div>
